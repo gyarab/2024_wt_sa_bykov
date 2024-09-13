@@ -16,5 +16,5 @@ Obsahuje 2 složky:
 - DD - číslo dne
 - XX - typ práce: hw (domácí úkol), cl (školní, ve třídě), sp (speciální)
 
-### Obsah
+### Obsah (důležíých věcí)
 ![Referát na Linuse Torvaldse](https://github.com/gyarab/2024_wt_sa_bykov/blob/main/webtech/13sep-hw/LINUSTORVALDS.md)
