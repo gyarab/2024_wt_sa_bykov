@@ -1,9 +1,14 @@
 # Repozitář 2024_wt_sa_bykov
+_aneb martinovo kód_
+
+***
 
 Repozitář školních projektů (vyjma RP a IOČ) random studenta 2.E (2024/25) zde, na GitHubu Arabské.
 Obsahuje 2 složky:
 - **programko** _(Programování, prof. Mgr. Jan Lána)_
 - **webtech** _(Webové Technologie, prof. Ing. Václav Chalupníček)_
+
+***
 
 ### Názvy složek ve složkách webtech a programko
 - název složek ve formátu MMMDD-XX
