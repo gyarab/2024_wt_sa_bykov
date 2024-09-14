@@ -13,6 +13,17 @@ Věci které pomohl vytvořit:
 3. Subsurface (software na plánování potápění, 2011)
 4. Jeho povaha a **lehká** kritika společnosti Nvidia
 
-# Rodina 
+## Rodina 
 Ženatý, 3 děti. ![Otec politik a poslanec v Evropském parlamentu](https://en.wikipedia.org/wiki/Nils_Torvalds). 
 Jeden z dědečků ![byl básníkem](https://en.wikipedia.org/wiki/Ole_Torvalds) a druhý ![prvním profesorem statistik ve Finsku](https://en.wikipedia.org/wiki/Leo_T%C3%B6rnqvist).
+
+## ![Tabulka nějvětších finských měst](https://en.wikipedia.org/wiki/List_of_urban_areas_in_Finland_by_population)
+__(včetně označení toho kde se Linus narodil)__
+
+|Pořádí|Město|Obyvatel|Počet narozených Linusů
+|------|-----|--------|-----------------------|
+|**1.**|**Helsinki**|**1 305 893**|**1**|
+|2.|Tampere|341 696|0|
+|3.|Turku|277 677|0|
+|4.|Oulu|205 137|0|
+|5.|Jyväskylä|128 911|0|
