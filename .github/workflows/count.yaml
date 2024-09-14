@@ -1,0 +1,25 @@
+# Code counting using scc
+
+name: Počítání počtu linek kódu (main)
+
+on:
+  push:
+     branches: [main]
+    
+jobs:
+   codecount:
+    runs-on: ubuntu-latest
+    name: Code Counting
+    steps:
+      - name: Načtení repozitáře
+        uses: actions/checkout@v4
+      - name: Počítání
+        id: scc
+        uses: Adapt-API/scc-docker-action@master
+        #temp nocount will serve as place for useless stuff
+        with:
+          args: ${{ env.workspace }} -i --exclude-dir nocount/
+      - name: Výstup
+        run: |
+          echo
+          echo -n "${{ steps.scc.outputs.scc }}"
