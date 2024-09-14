@@ -46,21 +46,20 @@ public class MedianCalculator {
         }
 
         int old_int_list_length = ints.size();
-        ints = MedianCalculator.sort(ints);
+        MedianCalculator.sort(ints);
 
         System.out.print("Sorted list: ");
         System.out.println(ints);
 
         assert ints.size() == old_int_list_length; //check if we failed miserably with sorting (different length)
-
         //check if failed (but not too miserably)
         if(!MedianCalculator.validate(ints)) throw new RuntimeException("String not sorted!");
 
         if(ints.size() % 2 == 0) {
-            double medianid = Math.floor(ints.size()/2);
-            Integer val1 = ints.get((int)medianid);
-            Integer val2 = ints.get((int)medianid+1);
-            Double value = (double)(val1+val2)/2; //avg of 2 middle ones
+            int medianid = ints.size()/2;
+            int val1 = ints.get((int)medianid);
+            int val2 = ints.get((int)medianid-1);
+            double value = (double)(val1+val2)/2; //avg of 2 middle ones
             System.out.println(String.format("Avg of 2 in middle: (%d,%d): %1.2f \nFirst value: %d", val1, val2, value, val1));
         }
         else {
