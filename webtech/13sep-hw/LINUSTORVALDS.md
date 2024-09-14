@@ -3,6 +3,9 @@
 ![Vtip o Torvaldsovi](https://preview.redd.it/omxbvvlt3lo01.jpg?auto=webp&s=b3e88a0ec121f182d120a19b69f6680f3bd3d694)
 
 Narozen roku 1969 v Helsinkách (Finsko). Současně má dvojí občanství (USA/Finsko) a bydlí v Americe.
+
+Je mezinárodně uznáván jako jeden s nejvlivnějších lidí v IT (>10 ocenění mezinárodních ocenění), jeho jméno nese i ![asteroid](https://en.wikipedia.org/wiki/List_of_minor_planets:_9001%E2%80%9310000#793) či ![měsíc](https://en.wikipedia.org/wiki/Linus_(moon)).
+
 Současně má následující pozice:
 - Vývojář první verze kernelu Linux
 - Vývojář programu Git
