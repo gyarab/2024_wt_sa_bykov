@@ -1,0 +1,20 @@
+# Copy to root
+# Martin Bykov 2024-2025
+
+name: Kopírování (main)
+
+on:
+  push:
+     branches: [main]
+    
+jobs:
+   codecount:
+    runs-on: ubuntu-latest
+    name: Copying
+    steps:
+      - name: Načtení repozitáře
+        uses: actions/checkout@v4
+      - name: Spušťení skriptu 
+        run: |
+          chmod u+x "${GITHUB_WORKSPACE}/copyfile.sh"
+          bash "${GITHUB_WORKSPACE}/copyfile.sh"
