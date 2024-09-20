@@ -1,4 +1,6 @@
-# ![Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds)
+# Linus Torvalds
+
+Odkaz na Wikipedii: ![Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds)
 
 ![Vtip o Torvaldsovi](https://preview.redd.it/omxbvvlt3lo01.jpg?auto=webp&s=b3e88a0ec121f182d120a19b69f6680f3bd3d694)
 
