@@ -24,8 +24,10 @@ jobs:
           git config --global user.name "Github chalupní kopírka (akce)"
           git add -A
           if [[ -n $(git commit -am "Překopírování souborů do složky root") ]]; then
+            echo "1=1"
             echo "1=1" >> "$GITHUB_OUTPUT"
           else
+            echo "0=1"
             echo "0=1" >> "$GITHUB_OUTPUT"
           fi
           git push
