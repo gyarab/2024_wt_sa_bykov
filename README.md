@@ -17,5 +17,5 @@ Obsahuje 2 složky:
 - XX - typ práce: hw (domácí úkol), cl (školní, ve třídě), sp (speciální)
 
 ### Obsah (důležítých věcí)
-![Referát na Linuse Torvaldse](https://github.com/gyarab/2024_wt_sa_bykov/blob/main/webtech/13sep-hw/LINUSTORVALDS.md)
-![Referát na barvy ČD](https://github.com/gyarab/2024_wt_sa_bykov/blob/main/webtech/20sep-hw/COLOR.md)
+- ![Referát na Linuse Torvaldse](https://github.com/gyarab/2024_wt_sa_bykov/blob/main/webtech/13sep-hw/LINUSTORVALDS.md)
+- ![Referát na barvy ČD](https://github.com/gyarab/2024_wt_sa_bykov/blob/main/webtech/20sep-hw/COLOR.md)
