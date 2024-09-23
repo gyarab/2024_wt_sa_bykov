@@ -7,8 +7,6 @@
 
 ![Fotografie motorového vozu 810 ve stanici Protivín](https://www.vagonweb.cz/fotogalerie/foto/201202/810575-Protivin.jpg) *Zde vidíme motorový vůž 810 ve st. Protivín*
 
-Používají se barvy 
-
 Schéma se lidově jmenuje "Najbrt" podle grafického studia které jí vytvořilo. (https://www.najbrt.cz/prace/ceske-drahy).
 Vytvořili také písmo ČD, které je založena na Fedra Sans. Logicky se pak písmo jmenuje **ČD Fedra Sans**.
 
