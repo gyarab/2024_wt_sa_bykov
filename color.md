@@ -25,8 +25,8 @@ Barvy Českých drah vyobrazují všechno co ČD chce být, i když občas neús
 
 ## Zdroje
 
-1. ![Psychlogie barev](https://www.scienceofpeople.com/color-psychology/)
-2. ![Stránka značky ČD](https://cd.brandcloud.pro/en/)
-3. ![Sekce pro média, skupina ČD](https://www.ceskedrahy.cz/pro-media)
-4. ![Fotogalerie vozů ČD stránky VagónWeb](https://www.vagonweb.cz/fotogalerie/CZ/index_CD.php)
-5. ![Studio Najbrt](https://www.najbrt.cz/prace) 
+1. Psychlogie barev - https://www.scienceofpeople.com/color-psychology/
+2. Stránka značky ČD - https://cd.brandcloud.pro/en/
+3. Sekce pro média, skupina ČD - https://www.ceskedrahy.cz/pro-media
+4. Fotogalerie vozů ČD stránky VagónWeb - https://www.vagonweb.cz/fotogalerie/CZ/index_CD.php
+5. Studio Najbrt - https://www.najbrt.cz/prace
