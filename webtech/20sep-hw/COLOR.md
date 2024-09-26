@@ -3,7 +3,7 @@
 
 ![Logo ČD](https://cd.brandcloud.pro/storage/10010/previews/1000x/acbf6d45f38701e280fbaa2bacdf9d63.webp)
 
-České dráhy vyuižívají 3 základní barvy (odkaz na stránky značky ČD - https://cd.brandcloud.pro/en/](https://cd.brandcloud.pro/document/47790/104659) jak na logu, tak i na jednotlivých vlacích.
+České dráhy vyuižívají 3 základní barvy *(odkaz na stránky značky ČD - https://cd.brandcloud.pro/document/47790/104659)* jak na logu, tak i na jednotlivých vlacích.
 
 ![Fotografie motorového vozu 810 ve stanici Protivín](https://www.vagonweb.cz/fotogalerie/foto/201202/810575-Protivin.jpg) *Zde vidíme motorový vůž 810 ve st. Protivín*
 
