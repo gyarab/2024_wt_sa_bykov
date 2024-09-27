@@ -49,11 +49,11 @@ jobs:
       - name: Downloading
         run: |
           git checkout -b publish
-          mkdir temp/
-          mkdir docs/
+          mkdir temp
+          mkdir docs
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
-          rmdir temp/
+          rmdir temp
           
       
