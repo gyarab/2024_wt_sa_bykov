@@ -48,9 +48,11 @@ jobs:
       # download files from all repos prefixed saved in repos list
       - name: Downloading
         run: |
+          git checkout -b publish
           mkdir temp/
+          mkdir docs/
           python .github/workflows/mkdocs/mkdocsgen.py
-          cd temp 
+          cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
           rmdir temp/
           
