@@ -3,6 +3,13 @@ _aneb martinovo kód_
 
 ***
 
+### Status
+
+![codecount](https://github.com/gyarab/2024_wt_sa_bykov/actions/workflows/codecount.yaml/badge.svg)
+![scriptrunner](https://github.com/gyarab/2024_wt_sa_bykov/actions/workflows/scriptrunner.yaml/badge.svg)
+
+***
+
 Repozitář školních projektů (vyjma RP a IOČ) random studenta 2.E (2024/25) zde, na GitHubu Arabské.
 Obsahuje 3 složky:
 - **programko** _(Programování, prof. Mgr. Jan Lána)_
