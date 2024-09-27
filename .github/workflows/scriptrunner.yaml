@@ -51,7 +51,7 @@ jobs:
           mkdir temp/
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
-          mkdocs gh-deploy -f ../.github/workflows/mkdocs/mkdocs.yml
+          mkdocs gh-deploy --config-file ../.github/workflows/mkdocs/mkdocs.yml
           rmdir temp/
           
       
