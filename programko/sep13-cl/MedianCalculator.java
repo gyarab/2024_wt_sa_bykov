@@ -40,6 +40,9 @@ public class MedianCalculator {
         Scanner s = new Scanner(System.in);
         String[] input = s.nextLine().split(",|;|/|\\");
 
+        //bugfix - 27/9/24
+        s.close();
+
         List<Integer> ints = new ArrayList<Integer>();
         for(int i = 0; i < input.length; i++) {
             ints.add(Integer.parseInt(input[i]));
@@ -64,6 +67,6 @@ public class MedianCalculator {
         }
         else {
             System.out.println(ints.get(ints.size()/2));
-        }
+        };
     }
 }
