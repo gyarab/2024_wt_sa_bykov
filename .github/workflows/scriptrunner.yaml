@@ -50,8 +50,8 @@ jobs:
         run: |
           mkdir temp/
           python .github/workflows/mkdocs/mkdocsgen.py
-          cd temp
-          mkdocs gh-deploy --config-file ../.github/workflows/mkdocs/mkdocs.yml
+          cd temp 
+          mkdocs gh-deploy --config-file ../.github/workflows/mkdocs/mkdocs.yml --remote-branch publish
           rmdir temp/
           
       
