@@ -4,9 +4,10 @@ _aneb martinovo kód_
 ***
 
 Repozitář školních projektů (vyjma RP a IOČ) random studenta 2.E (2024/25) zde, na GitHubu Arabské.
-Obsahuje 2 složky:
+Obsahuje 3 složky:
 - **programko** _(Programování, prof. Mgr. Jan Lána)_
 - **webtech** _(Webové Technologie, prof. Ing. Václav Chalupníček)_
+- **ioc-misc** _(Pomocné dokumenty k IOČ, obcházení limitů webové aplikace)_
 
 ***
 
