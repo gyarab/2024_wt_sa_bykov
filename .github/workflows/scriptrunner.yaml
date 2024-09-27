@@ -8,7 +8,7 @@ on:
      branches: [main]
     
 jobs:
-   codecount:
+  codecount:
     runs-on: ubuntu-latest
     name: Kopírování (main)
     steps:
@@ -31,10 +31,11 @@ jobs:
             echo "0=1" >> "$GITHUB_OUTPUT"
           fi
           git push
-    mkdocs:
-      runs-on: ubuntu-latest
-      name: Generátor dokumentace
-      steps:
+    
+  mkdocs:
+    runs-on: ubuntu-latest
+    name: Generátor dokumentace
+    steps:
       - uses: actions/checkout@v4
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
