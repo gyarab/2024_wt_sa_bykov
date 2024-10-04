@@ -1,1 +1,3 @@
 site_name: Dokumentace pro markdown referáty
+theme:
+  name: readthedocs
