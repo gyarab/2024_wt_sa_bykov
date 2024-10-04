@@ -32,13 +32,21 @@ for line in lines:
             print("Error! Status code", response.status_code)
             continue 
 
-        doc = response.text        
+        doc = response.text      
 
-        if not os.path.exists("docs/"+d+"/"+line+".md"):
-            file = open("docs/"+d+"/"+line+".md", "x+", encoding='utf-8')
+        filename = line
+        # get first header as name  
+        for fileline in doc.splitlines():
+            if(len(fileline) >= 1):
+                if(fileline.lstrip()[0] == '#'):
+                    filename = fileline[1:]
+                    break
+
+        if not os.path.exists("docs/"+d+"/"+filename+".md"):
+            file = open("docs/"+d+"/"+filename+".md", "x+", encoding='utf-8')
 
         # add source
-        file.write("*Zdroj referátu: https://github.com/gyarab/"+line+"/refs/heads/main/"+d+".md*\n\n")
+        file.write("*Zdroj referátu: [odkaz](https://github.com/gyarab/"+line+"/refs/heads/main/"+d+".md)*\n\n")
 
         # add date of retrieval
         file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S")+"*\n\n***\n\n")
