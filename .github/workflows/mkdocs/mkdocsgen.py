@@ -41,7 +41,7 @@ for line in lines:
         file.write("*Zdroj referátu: https://github.com/gyarab/"+line+"/refs/heads/main/"+d+".md*\n\n")
 
         # add date of retrieval
-        file.write("*Datum: "+datetime.datetime.strftime("%e.%m.%Y, %H:%M:%S")+"*\n***\n\n")
+        file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S")+"*\n\n***\n\n")
 
         file.write(doc)
         file.close()
