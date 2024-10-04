@@ -1,4 +1,3 @@
 site_name: Dokumentace pro markdown referáty
-theme:
-  name: readthedocs
+theme: darkly
 site_url: https://gyarab.github.io/2024_wt_sa_bykov/
