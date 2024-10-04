@@ -55,6 +55,7 @@ jobs:
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
+          cd ..
           rmdir temp
           git add -A
           git commit -am "Nová verze dokumentace"
