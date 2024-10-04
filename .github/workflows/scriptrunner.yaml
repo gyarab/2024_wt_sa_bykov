@@ -50,6 +50,7 @@ jobs:
         run: |
           git pull
           mkdir temp
+          mkdir docs
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
