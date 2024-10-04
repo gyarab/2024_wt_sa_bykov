@@ -42,8 +42,10 @@ for line in lines:
                     filename = fileline[1:]
                     break
 
-        if not os.path.exists("docs/"+d+"/"+filename+".md"):
-            file = open("docs/"+d+"/"+filename+".md", "x+", encoding='utf-8')
+        if os.path.exists("docs/"+d+"/"+filename+".md"):
+            os.remove("docs/"+d+"/"+filename+".md")
+
+        file = open("docs/"+d+"/"+filename+".md", "x+", encoding='utf-8')
 
         # add source
         file.write("*Zdroj referátu: [odkaz](https://github.com/gyarab/"+line+"/refs/heads/main/"+d+".md)*\n\n")
