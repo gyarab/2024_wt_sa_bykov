@@ -56,7 +56,7 @@ jobs:
           cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
           cd ..
-          rmdir temp
+          rm -r temp
           git add -A
           git commit -am "Nová verze dokumentace"
           git push
