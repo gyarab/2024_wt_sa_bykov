@@ -19,7 +19,7 @@ directories = ["referat", "color"]
 print("Found", len(lines), "repos")
 
 for d in directories:
-    os.makedirs(d+"/")
+    os.makedirs("docs/"+d+"/")
 
 for line in lines:
     line = line.replace("\n", "")
