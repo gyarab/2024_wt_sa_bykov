@@ -32,8 +32,8 @@ for line in lines:
 
         doc = response.text
 
-        if not os.path.exists("temp/"+line+"-"+f):
-            file = open("temp/"+line+"-"+f, "x+", encoding='utf-8')
+        if not os.path.exists("docs/"+line+"-"+f):
+            file = open("docs/"+line+"-"+f, "x+", encoding='utf-8')
         file.write(doc)
         file.close()
 
