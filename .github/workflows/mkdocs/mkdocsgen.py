@@ -14,14 +14,17 @@ file = open(".github/workflows/mkdocs/repolist.txt")
 lines = file.readlines()
 file.close()
 
-files_to_load = ["referat.md", "color.md"]
+directories = ["referat", "color"]
 
 print("Found", len(lines), "repos")
 
+for d in directories:
+    os.makedirs(d+"/")
+
 for line in lines:
     line = line.replace("\n", "")
-    for f in files_to_load:
-        url = "https://raw.githubusercontent.com/gyarab/"+line+"/refs/heads/main/"+f
+    for d in directories:
+        url = "https://raw.githubusercontent.com/gyarab/"+line+"/refs/heads/main/"+d+".md"
         print("Loading", url)
 
         # save file
@@ -32,8 +35,8 @@ for line in lines:
 
         doc = response.text
 
-        if not os.path.exists("docs/"+line+"-"+f):
-            file = open("docs/"+line+"-"+f, "x+", encoding='utf-8')
+        if not os.path.exists("docs/"+d+"/"+line+".md"):
+            file = open("docs/"+d+"/"+line+".md", "x+", encoding='utf-8')
         file.write(doc)
         file.close()
 
