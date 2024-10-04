@@ -8,6 +8,8 @@ _aneb martinovo kód_
 ![codecount](https://github.com/gyarab/2024_wt_sa_bykov/actions/workflows/codecount.yaml/badge.svg)
 ![scriptrunner](https://github.com/gyarab/2024_wt_sa_bykov/actions/workflows/scriptrunner.yaml/badge.svg)
 
+***
+
 ### Web
 Web tohoto repozitáře obsahuje dokumentaci referátů této třídz a slouží jako alternativa k webu pana prof. Chalupníčka.
 
