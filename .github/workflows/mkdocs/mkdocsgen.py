@@ -1,10 +1,9 @@
 # inspiration https://github.com/gyarab/2024_wt_chalupnicek/blob/main/download_pages.py
 
-import mkdocs
 import httpx
-import re
 import os
 import sys
+import datetime
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -33,10 +32,17 @@ for line in lines:
             print("Error! Status code", response.status_code)
             continue 
 
-        doc = response.text
+        doc = response.text        
 
         if not os.path.exists("docs/"+d+"/"+line+".md"):
             file = open("docs/"+d+"/"+line+".md", "x+", encoding='utf-8')
+
+        # add source
+        file.write("*Zdroj referátu: https://github.com/gyarab/"+line+"/refs/heads/main/"+d+".md*\n\n")
+
+        # add date of retrieval
+        file.write("*Datum: "+datetime.datetime.strftime("%e.%m.%Y, %H:%M:%S")+"*\n***\n\n")
+
         file.write(doc)
         file.close()
 
