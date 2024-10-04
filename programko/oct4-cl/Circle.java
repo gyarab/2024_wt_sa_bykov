@@ -22,4 +22,7 @@ public class Circle extends Shape {
     double countArea() {
         return Math.PI*Math.pow(this.radius, 2.0);
     }
+    double countPerimeter() {
+        return 2*Math.PI*this.radius;
+    }
 }

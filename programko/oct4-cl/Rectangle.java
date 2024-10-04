@@ -32,4 +32,8 @@ public class Rectangle extends Shape {
     double countArea() {
         return this.a*this.b;
     }
+
+    double countPerimeter() {
+        return (2*this.a)+(2*this.b);
+    }
 }

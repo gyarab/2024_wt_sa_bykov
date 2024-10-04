@@ -44,4 +44,8 @@ public class Triangle extends Shape {
         double s = (this.a+this.b+this.c)*0.5; //semiperimeter - 1/2 of perimeter
         return Math.sqrt(s*(s-this.a)*(s-this.b)*(s-this.c));
     }
+
+    double countPerimeter() {
+        return this.a+this.b+this.c;
+    }
 }
