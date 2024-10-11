@@ -4,6 +4,7 @@ import httpx
 import os
 import sys
 import datetime
+from unidecode import unidecode
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -19,6 +20,8 @@ print("Found", len(lines), "repos")
 
 for d in directories:
     os.makedirs("docs/"+d+"/")
+    # sanitize D - remove diacritics and space
+    d = unidecode(d)
 
 for line in lines:
     line = line.replace("\n", "")
