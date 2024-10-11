@@ -22,6 +22,8 @@ print("Found", len(lines), "repos")
 for d in directories:
     os.makedirs("docs/"+d+"/")
 
+os.makedirs("docs/resources/")
+
 for line in lines:
     line = line.replace("\n", "")
     for d, f in zip(directories, files):
@@ -45,23 +47,32 @@ for line in lines:
             for fileline in doc.splitlines():
                 if(len(fileline) >= 1):
                     if(fileline.lstrip()[0] == '#'):
-                        filename = fileline[1:].lstrip()
+                        filename = fileline.lstrip()[1:].lstrip()
                         break
 
         # sanitize
         filename = filename.replace("\"", "").replace("\'", "")
 
+        if extension == "html":
+            if os.path.exists("docs/resource/"+filename+"."+extension):
+                os.remove("docs/resource/"+filename+"."+extension)
+            file = open("docs/resource/"+filename+"."+extension, "x+", encoding='utf-8')
+            file.write(doc)
+            file.close()
+
         if os.path.exists("docs/"+d+"/"+filename+".md"):
             os.remove("docs/"+d+"/"+filename+".md")
-
+            
         file = open("docs/"+d+"/"+filename+".md", "x+", encoding='utf-8')
-
         # add source
-        file.write("*Zdroj referátu: [odkaz](https://github.com/gyarab/"+line+"/refs/heads/main/"+f+")*\n\n")
+        file.write("*Zdroj: [odkaz](https://github.com/gyarab/"+line+"/refs/heads/main/"+f+")*\n\n")
         # add date of retrieval
         file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S UTC")+"*\n\n***\n\n")
 
-        file.write(doc)
+        if extension == "html": 
+            file.write("<iframe src=\"/docs/resource/"+filename+"\"></iframe>")
+        else:
+            file.write(doc)
 
         file.close()
 
