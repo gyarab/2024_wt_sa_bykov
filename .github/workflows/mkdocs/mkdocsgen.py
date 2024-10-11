@@ -14,19 +14,18 @@ file = open(".github/workflows/mkdocs/repolist.txt")
 lines = file.readlines()
 file.close()
 
-directories = ["referat", "color"]
+directories = ["referat", "color", "sites"]
+files = ["referat.md", "color.md", "index.html"]
 
 print("Found", len(lines), "repos")
 
 for d in directories:
     os.makedirs("docs/"+d+"/")
-    # sanitize D - remove diacritics and space
-    d = unidecode(d)
 
 for line in lines:
     line = line.replace("\n", "")
-    for d in directories:
-        url = "https://raw.githubusercontent.com/gyarab/"+line+"/refs/heads/main/"+d+".md"
+    for d, f in zip(directories, files):
+        url = "https://raw.githubusercontent.com/gyarab/"+line+"/refs/heads/main/"+f
         print("Loading", url)
 
         # save file
@@ -37,13 +36,20 @@ for line in lines:
 
         doc = response.text      
 
+        # sanitize - remove diacritics and space
         filename = line
-        # get first header as name  
-        for fileline in doc.splitlines():
-            if(len(fileline) >= 1):
-                if(fileline.lstrip()[0] == '#'):
-                    filename = fileline[1:]
-                    break
+        extension = f.split(".")[1]
+
+        # get first header as name (if markdown)
+        if extension == "md": 
+            for fileline in doc.splitlines():
+                if(len(fileline) >= 1):
+                    if(fileline.lstrip()[0] == '#'):
+                        filename = fileline[1:].lstrip()
+                        break
+
+        # sanitize
+        filename = filename.replace("\"", "").replace("\'", "")
 
         if os.path.exists("docs/"+d+"/"+filename+".md"):
             os.remove("docs/"+d+"/"+filename+".md")
@@ -51,12 +57,12 @@ for line in lines:
         file = open("docs/"+d+"/"+filename+".md", "x+", encoding='utf-8')
 
         # add source
-        file.write("*Zdroj referátu: [odkaz](https://github.com/gyarab/"+line+"/refs/heads/main/"+d+".md)*\n\n")
-
+        file.write("*Zdroj referátu: [odkaz](https://github.com/gyarab/"+line+"/refs/heads/main/"+f+")*\n\n")
         # add date of retrieval
-        file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S")+"*\n\n***\n\n")
+        file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S UTC")+"*\n\n***\n\n")
 
         file.write(doc)
+
         file.close()
 
         print("Done!")
