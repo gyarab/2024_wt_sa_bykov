@@ -4,7 +4,6 @@ import httpx
 import os
 import sys
 import datetime
-from unidecode import unidecode
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -22,7 +21,8 @@ print("Found", len(lines), "repos")
 for d in directories:
     os.makedirs("docs/"+d+"/")
 
-os.makedirs("docresource/")
+resfolder = "docs/resource/"
+os.makedirs(resfolder)
 
 for line in lines:
     line = line.replace("\n", "")
@@ -54,9 +54,9 @@ for line in lines:
         filename = filename.replace("\"", "").replace("\'", "").rstrip()
 
         if extension == "html":
-            if os.path.exists("docresource/"+filename+"."+extension):
-                os.remove("docresource/"+filename+"."+extension)
-            file = open("docresource/"+filename+"."+extension, "x+", encoding='utf-8')
+            if os.path.exists(resfolder+filename+"."+extension):
+                os.remove(resfolder+filename+"."+extension)
+            file = open(resfolder+filename+"."+extension, "x+", encoding='utf-8')
             file.write(doc)
             file.close()
 
@@ -70,7 +70,7 @@ for line in lines:
         file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S UTC")+"*\n\n***\n\n")
 
         if extension == "html": 
-            file.write("<iframe src=\"/docresource/"+filename+"\"></iframe>")
+            file.write("<iframe src=\"/"+resfolder+filename+"\"></iframe>")
         else:
             file.write(doc)
 

@@ -3,3 +3,7 @@ theme: darkly
 site_url: https://gyarab.github.io/2024_wt_sa_bykov/
 exclude_docs: |
   *.html
+plugins:
+  - exclude:
+      glob:
+        - docs/resource/*
