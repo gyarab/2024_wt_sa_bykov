@@ -6,10 +6,10 @@ public class Main {
     
     public static void bubbleSort(ArrayList<Clovek> a) {
         boolean swapInIteration = false;
-        while(!swapInIteration) {
+        do {
             swapInIteration = false;
             for (int i = 1; i < a.size(); i++) {
-                if(a.get(i-1).compareTo(a.get(i)) > 0) {
+                if(a.get(i-1).compareTo(a.get(i)) >= 0) {
                     Clovek temp = a.get(i-1);
                     a.set(i-1, a.get(i));
                     a.set(i, temp);
@@ -17,6 +17,7 @@ public class Main {
                 }
             }
         }
+        while(swapInIteration);
     }
 
     /*

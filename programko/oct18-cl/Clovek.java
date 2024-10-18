@@ -21,6 +21,14 @@ public class Clovek implements Comparable<Clovek> {
 
     @Override
     public int compareTo(Clovek o) {
-        return this.toString().compareTo(o.toString());
+        if(!this.surname.equals(o.surname)) {
+            return this.surname.compareTo(o.surname);
+        }
+        else if(!this.name.equals(o.name)) {
+            return this.name.compareTo(o.name);
+        }
+        else {
+            return 0;
+        }
     }
 }
