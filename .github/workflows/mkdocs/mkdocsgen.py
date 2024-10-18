@@ -21,7 +21,7 @@ print("Found", len(lines), "repos")
 for d in directories:
     os.makedirs("docs/"+d+"/")
 
-resfolder = "docs/resource/"
+resfolder = "docresource/"
 os.makedirs(resfolder)
 
 for line in lines:

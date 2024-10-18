@@ -55,5 +55,10 @@ jobs:
           mkdocs gh-deploy --config-file ../mkdocs.yml
           cd ..
           rm -r temp
+      - name: Kopírování assetů (docresource)
+        run: |
+          git checkout -b gh-pages
+          git checkout main docresource/
+          
           
       
