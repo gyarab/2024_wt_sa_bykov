@@ -5,7 +5,7 @@ name: Skripty a procesování
 
 on:
   push:
-     branches: [main]
+    branches: [main]
     
 jobs:
   codecount:
