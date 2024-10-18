@@ -22,7 +22,7 @@ print("Found", len(lines), "repos")
 for d in directories:
     os.makedirs("docs/"+d+"/")
 
-os.makedirs("docs/resources/")
+os.makedirs("docresource/")
 
 for line in lines:
     line = line.replace("\n", "")
@@ -51,12 +51,12 @@ for line in lines:
                         break
 
         # sanitize
-        filename = filename.replace("\"", "").replace("\'", "")
+        filename = filename.replace("\"", "").replace("\'", "").rstrip()
 
         if extension == "html":
-            if os.path.exists("docs/resource/"+filename+"."+extension):
-                os.remove("docs/resource/"+filename+"."+extension)
-            file = open("docs/resource/"+filename+"."+extension, "x+", encoding='utf-8')
+            if os.path.exists("docresource/"+filename+"."+extension):
+                os.remove("docresource/"+filename+"."+extension)
+            file = open("docresource/"+filename+"."+extension, "x+", encoding='utf-8')
             file.write(doc)
             file.close()
 
@@ -70,7 +70,7 @@ for line in lines:
         file.write("*Datum: "+datetime.datetime.strftime(datetime.datetime.now(), "%e.%m.%Y, %H:%M:%S UTC")+"*\n\n***\n\n")
 
         if extension == "html": 
-            file.write("<iframe src=\"/docs/resource/"+filename+"\"></iframe>")
+            file.write("<iframe src=\"/docresource/"+filename+"\"></iframe>")
         else:
             file.write(doc)
 
