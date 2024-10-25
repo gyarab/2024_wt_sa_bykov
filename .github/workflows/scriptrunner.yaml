@@ -60,8 +60,7 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "Github chalupní kopírka (akce)"
           git checkout gh-pages
-          git checkout main -- docresource/*
-          git add -A
+          git checkout main docresource/*
           git commit -am "asset copy"
           git push
           
