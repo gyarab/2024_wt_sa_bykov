@@ -61,7 +61,7 @@ jobs:
           git config --global user.name "Github chalupní kopírka (akce)"
 
           git checkout gh-pages
-          git checkout main -- docresource
+          git checkout main -- docresource/
           git add docresource
           git commit -m "Kopírování assetů"
           git push
