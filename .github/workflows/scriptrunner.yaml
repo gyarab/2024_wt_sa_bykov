@@ -63,12 +63,8 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "Github chalupní kopírka (akce)"
-
-          git remote update
           git fetch        
-
           git checkout gh-pages
-          
           rm -r docresource
           mkdir -p docresource
           
@@ -77,7 +73,7 @@ jobs:
           
           git add -A
           git diff-index --quiet HEAD ||  git commit -am "copy files"
-          git push
+          git push origin gh-pages
 
           git branch -D origin/main-copy
           
