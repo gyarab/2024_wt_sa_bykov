@@ -72,7 +72,7 @@ jobs:
           rm -r docresource
           mkdir -p docresource
           
-          git restore --source origin/main-copy docresource/*.*
+          git restore --source main-copy docresource/*.*
           echo "GH restore done"
           
           git add docresource
