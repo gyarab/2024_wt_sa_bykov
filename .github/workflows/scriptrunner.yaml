@@ -65,7 +65,7 @@ jobs:
           
           git checkout gh-pages
                     
-          git restore --source main temp/docresource
+          git restore --source main docresource
 
       - name: Cleanup on main
         run: |
