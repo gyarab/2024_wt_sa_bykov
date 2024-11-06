@@ -13,8 +13,8 @@ file = open(".github/workflows/mkdocs/repolist.txt")
 lines = file.readlines()
 file.close()
 
-directories = ["referat", "color", "sites"]
-files = ["referat.md", "color.md", "index.html"]
+directories = ["referat", "color", "sites", "one", "two"]
+files = ["referat.md", "color.md", "index.html", "static_web/one.html", "static_web/two.html"]
 
 print("Found", len(lines), "repos")
 
