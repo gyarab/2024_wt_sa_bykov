@@ -63,7 +63,7 @@ jobs:
           git checkout gh-pages
 
           git checkout main -- docresource
-          git add docresource
+          git add docresource/*
           git commit -am "Kopírování assetů"
           git push
           
