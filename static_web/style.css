@@ -1,0 +1,16 @@
+.main-img {
+    width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+}
+
+.side-img {
+    height: 1em;
+    object-fit: contain;
+}
+
+body {
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
