@@ -59,6 +59,10 @@ jobs:
           git config --global user.name "Github chalupní kopírka (akce)"
 
           git fetch
+
+          git checkout main
+          find ./ -type d 
+          
           git checkout gh-pages
                     
           git restore --source main temp/docresource
