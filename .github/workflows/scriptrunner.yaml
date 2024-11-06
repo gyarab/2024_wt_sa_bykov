@@ -48,11 +48,17 @@ jobs:
       # download files from all repos prefixed saved in repos list
       - name: Generating
         run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "Github chalupní kopírka (akce)"
+
+          git checkout -b main-copy main
+          
           git pull
           mkdir temp
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
+          cd ..
       - name: Kopírování assetů (docresource)
         run: |
           git config --global user.email "actions@github.com"
@@ -61,23 +67,19 @@ jobs:
           git remote update
           git fetch        
 
-          echo "MAIN BRANCH"
-          git checkout main
-          find ./ -type d
-
-          echo "GITHUB PAGES BRANCH"
           git checkout gh-pages
-          find ./ -type d
           
           rm -r docresource
           mkdir -p docresource
           
-          git restore --source origin/main docresource/*.*
+          git restore --source origin/main-copy docresource/*.*
           echo "GH restore done"
           
           git add docresource
           git commit -m "copy"
           git push
+
+          git branch -D origin/main-copy
           
           echo "Done!"
 
