@@ -60,13 +60,12 @@ jobs:
 
           git fetch
           git checkout gh-pages
-          git checkout main -- temp/docresource
-          
-          git add temp/docresource
-          git commit -m "Kopírování assetů"
-          git push
+                    
+          git restore --source main temp/docresource
 
-          cd ..
+      - name: Cleanup on main
+        run: |
+          git checkout main
           rm -r temp
           
           
