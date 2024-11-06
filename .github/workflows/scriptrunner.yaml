@@ -72,7 +72,7 @@ jobs:
           rm -r docresource
           mkdir -p docresource
           
-          git restore --source=main --staged --worktree docresources
+          git restore --source=main --staged --worktree docresource/
           git add docresource
           git commit -m "copy"
           git push
