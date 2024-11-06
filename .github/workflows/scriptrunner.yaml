@@ -60,7 +60,6 @@ jobs:
 
           git fetch
           git checkout gh-pages
-          git pull
           git checkout main -- temp/docresource
           
           git add temp/docresource
