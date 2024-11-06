@@ -60,7 +60,7 @@ jobs:
 
           git fetch          
           git checkout gh-pages
-          mkdir docresource
+          mkdir -p docresource
           git checkout main docresource/
           git add docresource/
           git commit -m "copy"
