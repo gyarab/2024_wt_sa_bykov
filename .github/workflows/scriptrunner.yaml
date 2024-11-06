@@ -72,10 +72,14 @@ jobs:
           rm -r docresource
           mkdir -p docresource
           
-          git restore --source=main --staged --worktree docresource/
+          git restore --source main docresource
+          echo "GH restore done"
+          
           git add docresource
           git commit -m "copy"
           git push
+          
+          echo "Done!"
 
       - name: Cleanup on main
         run: |
