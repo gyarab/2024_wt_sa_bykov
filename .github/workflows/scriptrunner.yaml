@@ -61,15 +61,18 @@ jobs:
           git remote update
           git fetch        
 
+          echo "MAIN BRANCH"
           git checkout main
           find ./ -type d
-          
+
+          echo "GITHUB PAGES BRANCH"
           git checkout gh-pages
+          find ./ -type d
           
           rm -r docresource
           mkdir -p docresource
           
-          git checkout origin/main -- docresource
+          git restore --source=main --staged --worktree docresources
           git add docresource
           git commit -m "copy"
           git push
