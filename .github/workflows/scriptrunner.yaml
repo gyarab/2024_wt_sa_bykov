@@ -72,11 +72,11 @@ jobs:
           rm -r docresource
           mkdir -p docresource
           
-          git restore --source main-copy docresource/*.*
+          git checkout main-copy -- docresource
           echo "GH restore done"
           
-          git add docresource
-          git commit -m "copy"
+          git add -A
+          git diff-index --quiet HEAD ||  git commit -am "copy files"
           git push
 
           git branch -D origin/main-copy
