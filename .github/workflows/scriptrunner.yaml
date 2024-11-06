@@ -65,10 +65,12 @@ jobs:
           find ./ -type d
           
           git checkout gh-pages
+          
           rm -r docresource
           mkdir -p docresource
+          
           git checkout origin/main -- docresource
-          git add docresource/
+          git add docresource
           git commit -m "copy"
           git push
 
