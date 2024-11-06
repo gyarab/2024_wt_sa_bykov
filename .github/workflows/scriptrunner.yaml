@@ -51,9 +51,9 @@ jobs:
           git config --global user.email "actions@github.com"
           git config --global user.name "Github chalupní kopírka (akce)"
 
-          git checkout -b main-copy main
-          
           git pull
+          git switch -c main-copy main
+          
           mkdir temp
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
