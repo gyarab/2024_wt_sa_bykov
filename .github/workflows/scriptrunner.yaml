@@ -53,18 +53,22 @@ jobs:
           python .github/workflows/mkdocs/mkdocsgen.py
           cd temp
           mkdocs gh-deploy --config-file ../mkdocs.yml
-          cd ..
-          rm -r temp
       - name: Kopírování assetů (docresource)
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "Github chalupní kopírka (akce)"
 
+          git fetch
           git checkout gh-pages
-          git checkout main -- docresource/
-          git add docresource
+          git pull
+          git checkout main -- temp/docresource
+          
+          git add temp/docresource
           git commit -m "Kopírování assetů"
           git push
+
+          cd ..
+          rm -r temp
           
           
       
