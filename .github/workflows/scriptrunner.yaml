@@ -59,11 +59,15 @@ jobs:
           git config --global user.name "Github chalupní kopírka (akce)"
 
           git remote update
-          git fetch          
+          git fetch        
+
+          git checkout main
+          find ./ -type d
+          
           git checkout gh-pages
           rm -r docresource
           mkdir -p docresource
-          git checkout origin/main ./docresource/
+          git checkout origin/main docresource/
           git add docresource/
           git commit -m "copy"
           git push
