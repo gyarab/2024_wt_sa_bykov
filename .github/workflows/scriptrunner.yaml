@@ -63,7 +63,7 @@ jobs:
           git checkout gh-pages
           rm -r docresource
           mkdir -p docresource
-          git checkout --track origin/main ./docresource/
+          git checkout origin/main ./docresource/
           git add docresource/
           git commit -m "copy"
           git push
