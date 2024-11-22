@@ -1,4 +1,7 @@
+import java.nio.CharBuffer;
 import java.util.*;
+
+import javax.swing.SortingFocusTraversalPolicy;
 
 public class Main {
     public static final String[] names = {
@@ -120,9 +123,60 @@ public class Main {
         System.out.println(String.format("insertion %f milliseconds, %d comparisons, %d swaps", duration, comparisons, swaps));
     }
 
+    //ADDITION 22.11
+
+    //merge sort
+    //https://cs.wikipedia.org/wiki/%C5%98azen%C3%AD_slu%C4%8Dov%C3%A1n%C3%ADm
+
+    public static ArrayList<Clovek> mergeSortMerge(ArrayList<Clovek> a, ArrayList<Clovek> left, ArrayList<Clovek> right, MergeSortInformator si) {
+        si.addMergeCall();
+
+        ArrayList<Clovek> result = new ArrayList<Clovek>();
+
+        while(left.size() > 0 && right.size() > 0) {
+            //if left smaller of equal
+            si.addCompare();
+            if(left.get(0).compareTo(right.get(0)) < 0) {
+                result.add(left.get(0));
+                left.remove(0);
+            }
+            else {
+                result.add(right.get(0));
+                right.remove(0);
+            }
+        }
+        result.addAll(left);
+        left.clear();
+        result.addAll(right);
+        right.clear();
+
+        return result;
+    }
+
+    public static ArrayList<Clovek> mergeSort(ArrayList<Clovek> a, MergeSortInformator si) {
+        if(a.size() <= 1) return a;
+
+        ArrayList<Clovek> left = new ArrayList<Clovek>(), right = new ArrayList<Clovek>();
+        
+        int middlePoint = a.size()/2; //truncates
+        for(int i = 0; i < middlePoint; i++) { 
+            left.add(a.get(i));
+        }
+        for(int i = middlePoint; i < a.size(); i++) {
+            right.add(a.get(i));
+        }
+
+        left = mergeSort(left, si);
+        right = mergeSort(right, si);
+
+        a = mergeSortMerge(a, left, right, si);
+        return a;
+    }
+
     public static void main(String[] args) {
         ArrayList<Clovek> a = new ArrayList<Clovek>();
 
+        /*
         a.add(new Zamestnanec("zdenek", "hrib-smrkovy", 5000000));
         a.add(new Zamestnanec("profesor", "lana", 50000));
         a.add(new Zamestnanec("mario", "oGurik", 40000));
@@ -133,29 +187,36 @@ public class Main {
         a.add(new Zamestnanec("Grzegorz", "Brzeczyszczykiewicz", 5000));
         a.add(new Zamestnanec("Chrzaszczyzewroszycziak", "Lekolodski", 4897));
         a.add(new Zamestnanec("bobik", "mnammnamovy", 30));
+        */
 
-        for(int i = 0; i < 990; i++) {
-            a.add(randomPerson());
+        int sizes[] = {1, 2, 8, 100, 128, 500, 1000};
+        for(int i = 0; i < sizes.length; i++) {
+            a.clear();
+            for(int j = 0; j < sizes[i]; j++) {
+                //a.add(randomPerson());
+                a.add(new Clovek(Integer.toString(sizes[i]-j), Integer.toString(sizes[i]-j)));
+            }
+            System.out.println(String.format("SIZE %d", a.size()));
+
+            ArrayList<Clovek> bubble = deepClone(a);
+            bubbleSort(bubble);
+            ArrayList<Clovek> selection = deepClone(a);
+            selectionSort(selection);
+            ArrayList<Clovek> insertion = deepClone(a);
+            insertionSort(insertion);
+            ArrayList<Clovek> merge = deepClone(a);
+            MergeSortInformator si = new MergeSortInformator();
+            si.start();
+            merge = mergeSort(merge, si);
+            si.end();
+            System.out.println(si);
+
+            System.out.print(validate(bubble));
+            System.out.print(validate(selection));
+            System.out.print(validate(insertion));
+            System.out.print(validate(merge));
+            System.out.println("");
+            System.out.println("--");
         }
-
-        //System.out.println(a);
-
-        ArrayList<Clovek> bubble = deepClone(a);
-        bubbleSort(bubble);
-
-        ArrayList<Clovek> selection = deepClone(a);
-        selectionSort(selection);
-
-        ArrayList<Clovek> insertion = deepClone(a);
-        insertionSort(insertion);
-
-        //System.out.println(bubble);
-        //System.out.println(selection);
-        //System.out.println(insertion);
-
-        System.out.println(validate(a));
-        System.out.println(validate(bubble));
-        System.out.println(validate(selection));
-        System.out.println(validate(insertion));
     }
 }
