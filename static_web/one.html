@@ -12,46 +12,11 @@
                 font-size: 20vw;
             }
         </style>
+        <script src="imageChange.js"></script>
+        <script src="ssg.js"></script>
     </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <div>
-                    <a class="navbar-brand" href="#">
-                        <!-- bootstrap calculates with width - must be explicitly specified-->
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b9/Protesto.svg" alt="logo of USE" class="d-inline-block align-text-top" width="50">
-                        USE
-                    </a>
-                </div>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="container navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="./two.html">Link</a>
-                      </li>
-                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="https://www.wikipedia.org">Wikipedia</a></li>
-                          <li><a class="dropdown-item" href="https://www.gyarab.cz">School</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="https://megapolisplayer.github.io">My website</a></li>
-                        </ul>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                      </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <body onload="OnLoad('home')">
+        <span class="ssg-fillin-navbar"></span>
         <div class="container mb-1">
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-4 col-lg-4 ">
@@ -80,11 +45,11 @@
             <div class="row">
                 <div class="col-lg">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero minima nihil porro nobis vel dolore eligendi suscipit doloribus asperiores at vitae corrupti a eveniet, repudiandae obcaecati alias quisquam corporis eaque!
-                    <img src="https://placehold.co/400x250" class="mx-auto d-block img-fluid w-100" alt="Responsive image">
+                    <img src="https://placehold.co/400x250/ffffff/000000" class="mx-auto d-block img-fluid w-100" alt="Responsive image">
                 </div>
                 <div class="col-lg">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam iusto reiciendis nulla in officia voluptatibus vel quia non, a totam nisi blanditiis culpa, tempora quam. Eaque nobis veritatis quidem magni.
-                    <img src="https://placehold.co/400x250" class="mx-auto d-block img-fluid w-100" alt="Responsive image">
+                    <img src="https://placehold.co/400x250/ffff00/000000" class="mx-auto d-block img-fluid w-100" alt="Responsive image">
                 </div>
             </div>
         </div>
@@ -92,24 +57,28 @@
             <p>
                 České dráhy, a.s. (VKM: ČD) jsou česká železniční společnost, která podniká jako železniční dopravce v osobní dopravě. Má formu akciové společnosti, jejímž jediným akcionářem je Česká republika. Zakladatelem společnosti je Ministerstvo dopravy České republiky. Akciová společnost České dráhy má množství dceřiných společností, včetně železničního nákladní dopravce ČD Cargo, které dohromady vytváří Skupinu České dráhy. Skupina ČD patří se svými 22 tisíci zaměstnanců mezi největší zaměstnavatele v Česku a mezi největší české společnosti podle konsolidovaných tržeb. 
             </p>
-            <img src="https://placehold.co/800x500" class="mx-auto d-block img-fluid w-100" alt="Responsive image">
+            <img id="changed" src="https://placehold.co/600x400/" class="mx-auto d-block img-fluid w-100" alt="Some train probably">
+            <button class="btn btn-lg btn-outline-primary" onclick="ich()"><strong>change me!</strong></button>
         </div>
         <div class="container">
             <div class="row text-center">
                 <div class="col-12 col-md-4">
                     <i class="bi-train-front INT-large-icon"></i>
                     <br>
-                    <strong>PKP</strong>          
+                    <button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#pkpdialog"><strong>PKP</strong></button>
+                    <span id="ssg-fillin" source="dialog.html"></span>
                 </div>
                 <div class="col-12 col-md-4">
                     <i class="bi-train-lightrail-front INT-large-icon"></i>
                     <br>
-                    <strong>SKM</strong> 
+                    <button class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#skmdialog"><strong>SKM</strong></button>
+                    <span id="ssg-fillin" source="dialog.html"></span>
                 </div>
                 <div class="col-12 col-md-4">
-                    <i class="bi-info-circle-fill INT-large-icon" ></i>
+                    <i class="bi-info-circle-fill INT-large-icon"></i>
                     <br>
-                    <strong>Tickets</strong> 
+                    <button class="btn btn-lg btn-info" data-toggle="modal" data-target="#ticketdialog"><strong>Tickets</strong></button>
+                    <span id="ssg-fillin" source="dialog.html"></span>
                 </div>
             </div>
         </div>
