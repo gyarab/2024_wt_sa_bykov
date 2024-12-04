@@ -8,10 +8,8 @@ async function OnLoad(activePage) {
             if(carr.length > 3) {
                 console.error("Too many SSGSPLITs");
             }
-            contentExport = carr[1];
-        }
-        else {
-            contentExport = content;
+            console.log(carr);
+            content = carr[1];
         }
         document.querySelectorAll(".ssg-fillin-navbar").forEach((target) => { 
             target.innerHTML = content;
