@@ -1,0 +1,3 @@
+[submodule "pexeso"]
+	path = pexeso
+	url = git@github.com:MegapolisPlayer/Railpexeso.git
