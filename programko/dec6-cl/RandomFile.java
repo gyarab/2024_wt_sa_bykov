@@ -115,7 +115,6 @@ public class RandomFile {
         File finput = new File("randomNumbers.txt");
         FileReader input = new FileReader(finput);
 
-
         //read values - if odd write into one, if even into another
         
         Scanner sinput = new Scanner(input);
