@@ -1,8 +1,9 @@
+import java.math.BigInteger;
 import java.util.*;
 
 public class Main {
-    /*
-    public static int gcd(int a, int b) {
+    //euclid's original
+    public static int gcdOriginal(int a, int b) {
         int u = a;
         int w = b;
         
@@ -13,7 +14,46 @@ public class Main {
 
         return u;
     }
-    */
+
+    public static BigInteger gcdOriginalBigInt(BigInteger a, BigInteger b) {
+        //BigInteger is stupid
+        BigInteger u = BigInteger.ZERO;
+        u = u.add(a);
+        BigInteger w = BigInteger.ZERO;
+        w = w.add(b);
+
+        while(u.compareTo(w) == 0) {
+            if(u.compareTo(w) > 0) { u.subtract(w); }
+            else { w.subtract(u); }
+        }
+        return u;
+    }
+
+    public static BigInteger gcdMod(BigInteger a, BigInteger b) {
+       BigInteger u = BigInteger.ZERO;
+       u = u.add(a);
+       BigInteger w = BigInteger.ZERO;
+       w = w.add(b);
+
+       System.out.println(String.format("a is %d, b is %d", u, w));
+
+       while(true) {
+          if(u.compareTo(w) < 0) {
+            //swap
+            BigInteger t = BigInteger.ZERO;
+            t = t.add(w);
+            w = BigInteger.ZERO;
+            w = w.add(u);
+            u = BigInteger.ZERO;
+            u = u.add(t);
+          }
+          if(w.compareTo(BigInteger.ZERO) == 0) { break; }
+          u = u.mod(w);
+
+         System.out.println(String.format("a is %d, b is %d", u, w));
+        }
+       return u;
+    }
 
     public static int sum(int a) {
         int t = a;
@@ -68,31 +108,35 @@ public class Main {
     //TODO add atkin
 
     public static void main(String[] args) {
-        final int AMOUNT = 10000000;
-
-        long startTime = System.nanoTime();
-        int n = Eratosthenes(AMOUNT);
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime) / 1000000;
-        System.out.println("--");
-        System.out.println(n);
-        System.out.println(String.format("%d m %d s %d ms", (duration / 1000) / 60, duration / 1000, duration));
-        /*
-        int n = 0;
+        BigInteger n = BigInteger.ZERO;
+        BigInteger m = BigInteger.ZERO;
         try {
             Scanner s = new Scanner(System.in);
-            n = s.nextInt();
+            n = s.nextBigInteger();
+            m = s.nextBigInteger();
             s.close();
         }
         catch(Exception e) {
             System.out.println(e.getMessage());
             System.exit(-1);
         }
-        */
+
+        BigInteger shrt = gcdOriginalBigInt(m, n);
+        System.out.println(String.format("RESULT - %d/%d", n.divide(shrt), m.divide(shrt)));
+        BigInteger shrt2 = gcdMod(m, n);
+        System.out.println(String.format("RESULT2 - %d/%d", n.divide(shrt2), m.divide(shrt2)));
+
+        final int AMOUNT = 10_000_000;
+
+        long startTime = System.nanoTime();
+        int nAmount = Eratosthenes(AMOUNT);
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1000000;
+        System.out.println("--");
+        System.out.println(nAmount);
+        System.out.println(String.format("%d m %d s %d ms", (duration / 1000) / 60, duration / 1000, duration));
 
         /*
-        System.out.println(gcd(10, 1));
-
         //perf measure https://stackoverflow.com/questions/180158/how-do-i-time-a-methods-execution-in-java
 
         final int AMOUNT = 1000;
