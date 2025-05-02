@@ -22,6 +22,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * end = next
  */
 
+ //TODO write actual custom linked list later
+
 public class B {
     final static int ARRAY_AMOUNT = 200000;
     public static void main(String[] args) {
