@@ -6,3 +6,6 @@ site/
 *.jar
 **/target/
 **/*.class
+**/*.project
+**/*.class*
+**/.*/**
