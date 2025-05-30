@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Main {
+public class OptionalTest {
     public static class Node {
         int value;
         Node next;
@@ -152,65 +152,73 @@ public class Main {
             }
             return true;
         }
-    }
 
-    public static final int TEST_AMOUNT = 1000;
+        public static void selfTest(int testAmount, int listSize, boolean print) throws Exception {
+            int success = 0;
 
-    public static void main(String[] args) throws Exception {
-        int success = 0;
-
-        //random check
-        int randomOutput = ThreadLocalRandom.current().nextInt(0, TEST_AMOUNT);
-
-        long start = System.nanoTime();
-        for(int i = 0; i < TEST_AMOUNT; i++) {
-            DoubleLinkedList dll = new DoubleLinkedList();
+            //random check
+            int randomOutput = ThreadLocalRandom.current().nextInt(0, TEST_AMOUNT);
     
-            //automatic testing
-            for(int j = 0; j < 500; j++) {
-                switch(ThreadLocalRandom.current().nextInt(0, 3)) {
-                    case(0):
-                        dll.addNew(ThreadLocalRandom.current().nextInt(0, 99));
-                        continue;
-                    case(1):
-                        dll.prependNew(ThreadLocalRandom.current().nextInt(0, 99));
-                        continue;
-                    case(2):
-                        dll.insertNew(
-                            ThreadLocalRandom.current().nextInt(0, 99),
-                            0
-                        );
-                        continue;
-                    default: continue; //not going to happen, checkstyle go away
+            long start = System.nanoTime();
+            for(int i = 0; i < testAmount; i++) {
+                DoubleLinkedList dll = new DoubleLinkedList();
+        
+                //automatic testing
+                for(int j = 0; j < listSize; j++) {
+                    switch(ThreadLocalRandom.current().nextInt(0, 3)) {
+                        case(0):
+                            dll.addNew(ThreadLocalRandom.current().nextInt(0, 99));
+                            continue;
+                        case(1):
+                            dll.prependNew(ThreadLocalRandom.current().nextInt(0, 99));
+                            continue;
+                        case(2):
+                            dll.insertNew(
+                                ThreadLocalRandom.current().nextInt(0, 99),
+                                0
+                            );
+                            continue;
+                        default: continue; //not going to happen, checkstyle go away
+                    }
+                }
+        
+                dll.bubbleSortList();
+                if(dll.isSorted()) success++;
+                else {
+                    System.out.print(String.format("List no. %d failed: ", i));
+                    dll.print().printBack();
+                    throw new Exception(String.format("List no. %d failed: ", i));
+                }
+    
+                if(i == randomOutput && print) {
+                    System.out.print(String.format("Random check for list no. %d: ", i));
+                    dll.print().printBack();
                 }
             }
     
-            dll.bubbleSortList();
-            if(dll.isSorted()) success++;
-            else {
-                System.out.print(String.format("List no. %d failed: ", i));
-                dll.print().printBack();
-                throw new Exception(String.format("List no. %d failed: ", i));
-            }
-
-            if(i == randomOutput) {
-                System.out.print(String.format("Random check for list no. %d: ", i));
-                dll.print().printBack();
+            long end = System.nanoTime();
+            if(print) {
+                System.out.println(String.format("Tests took %d ms, successful: %d out of %d, percentage: %d%%", (end - start)/1000000, success, TEST_AMOUNT, success/TEST_AMOUNT * 100));
             }
         }
+    }
 
-        long end = System.nanoTime();
-        System.out.println(String.format("Tests took %d ms, successful: %d out of %d, percentage: %d%%", (end - start)/1000000, success, TEST_AMOUNT, success/TEST_AMOUNT * 100));
-    
-        //
-        //vstup do programu
-        //
+    public static final int TEST_AMOUNT = 1000;
+    public static final int LIST_SIZE = 500;
+
+    public static void main(String[] args) throws Exception {
+        DoubleLinkedList.selfTest(TEST_AMOUNT, LIST_SIZE, false);
 
         System.out.println("Enter values to add double linked list or \"END\" to finish sorting and and print the list.");
         DoubleLinkedList dll = new DoubleLinkedList();
         Scanner sc = new Scanner(System.in);
         for(String input = sc.next(); !input.equals("END"); input = sc.next()) {
-            dll.addNew(Integer.parseInt(input));
+            try {
+                dll.addNew(Integer.parseInt(input));
+            } catch(Exception e) {
+                System.out.println("Invalid input, try again.");
+                continue;
+            }
         }
         sc.close();
 
