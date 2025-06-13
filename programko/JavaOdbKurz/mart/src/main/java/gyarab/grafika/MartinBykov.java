@@ -35,9 +35,7 @@ public class MartinBykov extends Gyarab2D {
             );
     }
 
-
     public void drawSquare(Matrix m, int idx, int top, int left, int bottom, int right) {
-        //System.out.println(idx);
         int starty = Math.min(top, bottom);
         int startx = Math.min(left, right);
         int endy = Math.max(top, bottom);
@@ -126,36 +124,8 @@ public class MartinBykov extends Gyarab2D {
         double cz = Math.cos(radZ);
         double sz = Math.sin(radZ);
 
-        double[][] tData = {
-            {1.0, 0.0, 0.0, translateX},
-            {0.0, 1.0, 0.0, translateY},
-            {0.0, 0.0, 1.0, translateZ},
-            {0.0, 0.0, 0.0, 1.0},
-        };
-        double[][] rxData = {
-            {1.0, 0.0, 0.0, 0.0},
-            {0.0, cx, -sx, 0.0},
-            {0.0, sx, cx, 0.0},
-            {0.0, 0.0, 0.0, 1.0},
-        };
-        double[][] ryData = {
-            {cy, 0.0, sy, 0.0},
-            {0.0, 1.0, 0.0, 0.0},
-            {-sy, 0.0, cy, 0.0},
-            {0.0, 0.0, 0.0, 1.0},
-        };
-        double[][] rzData = {
-            {cz, -sz, 0.0, 0.0},
-            {sz, cz, 0.0, 0.0},
-            {0.0, 0.0, 1.0, 0.0},
-            {0.0, 0.0, 0.0, 1.0},
-        };
-        double[][] sData = {
-            {scaleX, 0.0, 0.0, 0.0},
-            {0.0, scaleY, 0.0, 0.0},
-            {0.0, 0.0, scaleZ, 0.0},
-            {0.0, 0.0, 0.0, 1.0},
-        };
+        //minified
+        double[][]tData={{1.0,0.0,0.0,translateX},{0.0,1.0,0.0,translateY},{0.0,0.0,1.0,translateZ},{0.0,0.0,0.0,1.0},};double[][]rxData={{1.0,0.0,0.0,0.0},{0.0,cx,-sx,0.0},{0.0,sx,cx,0.0},{0.0,0.0,0.0,1.0},};double[][]ryData={{cy,0.0,sy,0.0},{0.0,1.0,0.0,0.0},{-sy,0.0,cy,0.0},{0.0,0.0,0.0,1.0},};double[][]rzData={{cz,-sz,0.0,0.0},{sz,cz,0.0,0.0},{0.0,0.0,1.0,0.0},{0.0,0.0,0.0,1.0},};double[][]sData={{scaleX,0.0,0.0,0.0},{0.0,scaleY,0.0,0.0},{0.0,0.0,scaleZ,0.0},{0.0,0.0,0.0,1.0},};
 
         Matrix T = new Matrix(tData);
         Matrix Rx = new Matrix(rxData);
@@ -165,11 +135,10 @@ public class MartinBykov extends Gyarab2D {
 
         //order should be SRT - lib reverses
         Matrix rs = T.times(Rx).times(Ry).times(Rz).times(S);
-        //System.out.println(rs);
         return rs;
     }  
 
-        static final int LETTER_SIZE = 5;
+    static final int LETTER_SIZE = 5;
 
     public class CharacterData {
         public char character;
@@ -181,392 +150,12 @@ public class MartinBykov extends Gyarab2D {
         }
     };
 
-    final static int[] idk = { 
-        1, 1, 1, 1, 1,
-        1, 0, 1, 0, 1,
-        1, 1, 0, 1, 1,
-        1, 0, 1, 0, 1,
-        1, 1, 1, 1, 1
-    };
-
-    final static int[] aData = { 
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0, 
-        0, 1, 1, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0
-    };
-    final static int[] bData = { 
-        0, 1, 1, 0, 0, 
-        0, 1, 0, 1, 0,
-        0, 1, 1, 0, 0,
-        0, 1, 0, 1, 0, 
-        0, 1, 1, 0, 0,
-    };
-    final static int[] cData = { 
-        0, 0, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 0, 0, 0, 
-        0, 0, 1, 1, 0,
-    };
-    final static int[] dData = { 
-        0, 1, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 0, 0,
-    };
-    final static int[] eData = { 
-        0, 1, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 1, 1, 0,
-    };
-    final static int[] fData = { 
-        0, 1, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 0, 0, 0,
-    };
-    final static int[] gData = { 
-        0, 0, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 1, 0,
-    };
-    final static int[] hData = { 
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-    };
-    final static int[] iData = { 
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] jData = { 
-        0, 0, 0, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 1, 0,
-    };
-    final static int[] kData = { 
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-    };
-    final static int[] lData = {
-        0, 0, 1, 0, 0, 
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 1, 0,
-    };
-    final static int[] mData = { 
-        1, 0, 0, 0, 1,
-        1, 1, 0, 1, 1,
-        1, 0, 1, 0, 1,
-        1, 0, 0, 0, 1,
-        1, 0, 0, 0, 1,
-    };
-    final static int[] nData = { 
-        1, 0, 0, 0, 1,
-        1, 1, 0, 0, 1,
-        1, 0, 1, 0, 1,
-        1, 0, 0, 1, 1,
-        1, 0, 0, 0, 1,
-    };
-    final static int[] oData = {
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] pData = { 
-        0, 1, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 0, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 0, 0, 0,
-    };
-    final static int[] qData = { 
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 1,
-        0, 0, 1, 0, 1,
-    };
-    final static int[] rData = { 
-        0, 1, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-    };
-    final static int[] sData = { 
-        0, 0, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 0, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 1, 1, 1, 0,
-    }; 
-    final static int[] tData = { 
-        0, 1, 1, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] uData = {
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] vData = {
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] wData = {
-        1, 0, 0, 0, 1,
-        1, 0, 0, 0, 1,
-        1, 0, 1, 0, 1,
-        1, 0, 1, 0, 1,
-        0, 1, 0, 1, 0,
-    };
-    final static int[] xData = {
-        1, 0, 0, 0, 1,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        1, 0, 0, 0, 1,
-    };
-    final static int[] yData = {
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] zData = {
-        0, 1, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 1, 1, 0,
-    };
-    final static int[] commaData = {
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 1, 1, 0,
-    };
-    final static int[] dotData = {
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] zeroData = {
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] oneData = {
-        0, 0, 1, 0, 0,
-        0, 1, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 1, 1, 1, 0,
-    };
-    final static int[] twoData = {
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 1, 1, 1, 0,
-    };
-    final static int[] threeData = {
-        0, 1, 1, 0, 0,
-        0, 0, 0, 1, 0,
-        0, 1, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 1, 1, 0, 0,
-    };
-    final static int[] fourData = {
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 0, 1, 0,
-    };
-    final static int[] fiveData = {
-        0, 1, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 1, 1, 0, 0,
-    };
-    final static int[] sixData = {
-        0, 0, 1, 1, 0,
-        0, 1, 0, 0, 0,
-        0, 1, 1, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 1, 0,
-    };
-    final static int[] sevenData = {
-        0, 1, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] eightData = {
-        0, 1, 1, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 1, 0,
-    };
-    final static int[] nineData = {
-        0, 0, 1, 0, 0,
-        0, 1, 0, 1, 0,
-        0, 1, 1, 1, 0,
-        0, 0, 0, 1, 0,
-        0, 1, 1, 0, 0,
-    };
-    final static int[] exclamationData = {
-        0, 1, 1, 1, 0,
-        0, 1, 1, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] arrowLeftData = {
-        0, 0, 0, 1, 0,
-        0, 1, 1, 0, 0,
-        1, 1, 1, 1, 1,
-        0, 1, 0, 0, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] arrowRightData = {
-        0, 0, 1, 0, 0,
-        0, 0, 0, 1, 0,
-        1, 1, 1, 1, 1,
-        0, 0, 0, 1, 0,
-        0, 0, 1, 0, 0,
-    };
-    final static int[] apostropheData = {
-        0, 0, 1, 0, 0,
-        0, 0, 1, 1, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-    };
-    final static int[] quotationData = {
-        0, 1, 0, 1, 0,
-        0, 1, 0, 1, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-    };
-    final static int[] colonData = {
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 0, 0,
-    };
-    final static int[] semiColonData = {
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-        0, 1, 1, 0, 0,
-    };
-    final static int[] minusData = {
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 1, 1, 1, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 0, 0, 0,
-    };
-    final static int[] questionData = {
-        0, 1, 1, 0, 0,
-        0, 0, 0, 1, 0,
-        0, 0, 1, 0, 0,
-        0, 0, 0, 0, 0,
-        0, 0, 1, 0, 0,
-    };
+    //minified
+    final static int[]idk={1,1,1,1,1,1,0,1,0,1,1,1,0,1,1,1,0,1,0,1,1,1,1,1,1};final static int[]aData={0,0,1,0,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,0,0,1,0,1,0};final static int[]bData={0,1,1,0,0,0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0,1,1,0,0,};final static int[]cData={0,0,1,1,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,1,1,0,};final static int[]dData={0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,1,1,0,0,};final static int[]eData={0,1,1,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,0,0,1,1,1,0,};final static int[]fData={0,1,1,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,0,0,0,1,0,0,0,};final static int[]gData={0,0,1,1,0,0,1,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,1,1,0,};final static int[]hData={0,1,0,1,0,0,1,0,1,0,0,1,1,1,0,0,1,0,1,0,0,1,0,1,0,};final static int[]iData={0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,};final static int[]jData={0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,1,0,1,0,0,1,1,1,0,};final static int[]kData={0,1,0,1,0,0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,};final static int[]lData={0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,1,0,};final static int[]mData={1,0,0,0,1,1,1,0,1,1,1,0,1,0,1,1,0,0,0,1,1,0,0,0,1,};final static int[]nData={1,0,0,0,1,1,1,0,0,1,1,0,1,0,1,1,0,0,1,1,1,0,0,0,1,};final static int[]oData={0,0,1,0,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,};final static int[]pData={0,1,1,0,0,0,1,0,1,0,0,1,1,0,0,0,1,0,0,0,0,1,0,0,0,};final static int[]qData={0,0,1,0,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1,1,0,0,1,0,1,};final static int[]rData={0,1,1,0,0,0,1,0,1,0,0,1,1,0,0,0,1,0,1,0,0,1,0,1,0,};final static int[]sData={0,0,1,1,0,0,1,0,0,0,0,0,1,1,0,0,0,0,1,0,0,1,1,1,0,};final static int[]tData={0,1,1,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,};final static int[]uData={0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,};final static int[]vData={0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,};final static int[]wData={1,0,0,0,1,1,0,0,0,1,1,0,1,0,1,1,0,1,0,1,0,1,0,1,0,};final static int[]xData={1,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0,1,};final static int[]yData={0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,};final static int[]zData={0,1,1,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,1,1,1,0,};final static int[]commaData={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,};final static int[]dotData={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,};final static int[]zeroData={0,0,1,0,0,0,1,0,1,0,0,1,0,1,0,0,1,0,1,0,0,0,1,0,0,};final static int[]oneData={0,0,1,0,0,0,1,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,1,1,0,};final static int[]twoData={0,0,1,0,0,0,1,0,1,0,0,0,0,1,0,0,0,1,0,0,0,1,1,1,0,};final static int[]threeData={0,1,1,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,1,0,0,1,1,0,0,};final static int[]fourData={0,1,0,1,0,0,1,0,1,0,0,1,1,1,0,0,0,0,1,0,0,0,0,1,0,};final static int[]fiveData={0,1,1,1,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,0,0,1,1,0,0,};final static int[]sixData={0,0,1,1,0,0,1,0,0,0,0,1,1,1,0,0,1,0,1,0,0,0,1,1,0,};final static int[]sevenData={0,1,1,1,0,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,};final static int[]eightData={0,1,1,1,0,0,1,0,1,0,0,0,1,0,0,0,1,0,1,0,0,1,1,1,0,};final static int[]nineData={0,0,1,0,0,0,1,0,1,0,0,1,1,1,0,0,0,0,1,0,0,1,1,0,0,};final static int[]exclamationData={0,1,1,1,0,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,};final static int[]arrowLeftData={0,0,0,1,0,0,1,1,0,0,1,1,1,1,1,0,1,0,0,0,0,0,1,0,0,};final static int[]arrowRightData={0,0,1,0,0,0,0,0,1,0,1,1,1,1,1,0,0,0,1,0,0,0,1,0,0,};final static int[]apostropheData={0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};final static int[]quotationData={0,1,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,};final static int[]colonData={0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,};final static int[]semiColonData={0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,};final static int[]minusData={0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,};final static int[]questionData={0,1,1,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,};
 
     final CharacterData letters[] = {
-        new CharacterData('A', aData),
-        new CharacterData('B', bData),
-        new CharacterData('C', cData),
-        new CharacterData('D', dData),
-        new CharacterData('E', eData),
-        new CharacterData('F', fData),
-        new CharacterData('G', gData),
-        new CharacterData('H', hData),
-        new CharacterData('I', iData),
-        new CharacterData('J', jData),
-        new CharacterData('K', kData),
-        new CharacterData('L', lData),
-        new CharacterData('M', mData),
-        new CharacterData('N', nData),
-        new CharacterData('O', oData),
-        new CharacterData('P', pData),
-        new CharacterData('Q', qData),
-        new CharacterData('R', rData),
-        new CharacterData('S', sData),
-        new CharacterData('T', tData),
-        new CharacterData('U', uData),
-        new CharacterData('V', vData),
-        new CharacterData('W', wData),
-        new CharacterData('X', xData),
-        new CharacterData('Y', yData),
-        new CharacterData('Z', zData),
-        new CharacterData(',', commaData),
-        new CharacterData('.', dotData),
-        new CharacterData('0', zeroData),
-        new CharacterData('1', oneData),
-        new CharacterData('2', twoData),
-        new CharacterData('3', threeData),
-        new CharacterData('4', fourData),
-        new CharacterData('5', fiveData),
-        new CharacterData('6', sixData),
-        new CharacterData('7', sevenData),
-        new CharacterData('8', eightData),
-        new CharacterData('9', nineData),
-        new CharacterData('!', exclamationData),
-        new CharacterData('`', apostropheData),
-        new CharacterData('"', quotationData),
-        new CharacterData(':', colonData),
-        new CharacterData(';', semiColonData),
-        new CharacterData('-', minusData),
-        new CharacterData('?', questionData),
-        new CharacterData('\uAAAA', arrowLeftData),
-        new CharacterData('\uBBBB', arrowRightData),
+        //minified
+        new CharacterData('A',aData),new CharacterData('B',bData),new CharacterData('C',cData),new CharacterData('D',dData),new CharacterData('E',eData),new CharacterData('F',fData),new CharacterData('G',gData),new CharacterData('H',hData),new CharacterData('I',iData),new CharacterData('J',jData),new CharacterData('K',kData),new CharacterData('L',lData),new CharacterData('M',mData),new CharacterData('N',nData),new CharacterData('O',oData),new CharacterData('P',pData),new CharacterData('Q',qData),new CharacterData('R',rData),new CharacterData('S',sData),new CharacterData('T',tData),new CharacterData('U',uData),new CharacterData('V',vData),new CharacterData('W',wData),new CharacterData('X',xData),new CharacterData('Y',yData),new CharacterData('Z',zData),new CharacterData(',',commaData),new CharacterData('.',dotData),new CharacterData('0',zeroData),new CharacterData('1',oneData),new CharacterData('2',twoData),new CharacterData('3',threeData),new CharacterData('4',fourData),new CharacterData('5',fiveData),new CharacterData('6',sixData),new CharacterData('7',sevenData),new CharacterData('8',eightData),new CharacterData('9',nineData),new CharacterData('!',exclamationData),new CharacterData('`',apostropheData),new CharacterData('"',quotationData),new CharacterData(':',colonData),new CharacterData(';',semiColonData),new CharacterData('-',minusData),new CharacterData('?',questionData),new CharacterData('\uAAAA',arrowLeftData),new CharacterData('\uBBBB',arrowRightData),
     };
 
     public void renderCharData(Matrix m, int[] arr, int x, int y, int r, int g, int b) {
@@ -652,16 +241,6 @@ public class MartinBykov extends Gyarab2D {
 
             for(int i = 0; i < this.app.maxXY*2; i++) {
                 for(int j = 0; j < this.app.maxXY*2; j++) {
-                    //if(i % 10 == 0 && j % 10 == 0) {
-                    //    System.out.println(String.format("Processing pixel (%d, %d)", i-this.app.maxXY, j-this.app.maxXY));
-                    //    System.out.println(String.format("Bounds: xleft=%d, ytop=%d, xright=%d, ybottom=%d", 
-                    //        xleft, ytop, xright, ybottom));
-                    //    System.out.println(String.format("%b %b %b %b", (i-this.app.maxXY < xleft),
-                    //    i-this.app.maxXY >= xright,
-                    //    this.app.maxXY-j < ybottom,
-                    //    this.app.maxXY-j >= ytop));
-                    //}
-
                     //skip if out of bounds
                     if(i-this.app.maxXY < xleft || 
                     i-this.app.maxXY >= xright ||
