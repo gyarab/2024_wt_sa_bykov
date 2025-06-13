@@ -3,17 +3,17 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class FixedImpl {
     public static class Node {
-        int value;
+        String value;
         Node next;
         Node prev;
 
-        Node(int value) {
+        Node(String value) {
             this.value = value;
         }
 
         @Override
         public String toString() {
-            return Integer.toString(value);
+            return value;
         }
     }
 
@@ -22,8 +22,8 @@ public class FixedImpl {
         Node afterLast;
 
         DoubleLinkedList() {
-            this.beforeFirst = new Node(0);
-            this.afterLast = new Node(0);
+            this.beforeFirst = new Node("");
+            this.afterLast = new Node("");
             this.beforeFirst.next = this.afterLast;
             this.afterLast.prev = this.beforeFirst;
         }
@@ -35,7 +35,7 @@ public class FixedImpl {
             afterLast.prev = n;
             return this;
         }
-        public DoubleLinkedList addNew(int value) {
+        public DoubleLinkedList addNew(String value) {
             return this.add(new Node(value));
         }
         public DoubleLinkedList prepend(Node n) {
@@ -45,7 +45,7 @@ public class FixedImpl {
             beforeFirst.next = n;
             return this;
         }
-        public DoubleLinkedList prependNew(int value) {
+        public DoubleLinkedList prependNew(String value) {
             return this.prepend(new Node(value));
         }
         public DoubleLinkedList insert(Node n, int id) throws Exception {
@@ -63,7 +63,7 @@ public class FixedImpl {
 
             return this;
         }
-        public DoubleLinkedList insertNew(int value, int id) throws Exception {
+        public DoubleLinkedList insertNew(String value, int id) throws Exception {
             return this.insert(new Node(value), id);
         }
         public DoubleLinkedList print() {
@@ -87,17 +87,6 @@ public class FixedImpl {
             }
         }
 
-        public DoubleLinkedList removeEven() {
-            for(Node current = beforeFirst.next;;) {
-                if (current == afterLast) return this;
-
-                if(current.value % 2 == 0) {
-                    current.prev.next = current.next;
-                    current.next.prev = current.prev;
-                }
-                current = current.next;
-            }
-        }
         //bubble sort by swapping value
         public DoubleLinkedList bubbleSortValue() {
             boolean swaps = true;
@@ -105,9 +94,9 @@ public class FixedImpl {
                 swaps = false;
                 for (Node current = beforeFirst.next;;) {
                     if (current.next == afterLast) break;
-                    if(current.next.value < current.value) {
+                    if(current.next.value.compareTo(current.value) <= -1) {
                         swaps = true;
-                        int temp = current.value;
+                        String temp = current.value;
                         current.value = current.next.value;
                         current.next.value = temp;
                     }
@@ -124,7 +113,7 @@ public class FixedImpl {
                 for (Node current = beforeFirst.next;;) {
                     if (current.next == afterLast || current == afterLast) break;
 
-                    if(current.next.value < current.value) {
+                    if(current.next.value.compareTo(current.value) <= -1) {
                         swaps = true;
 
                         Node s = current;
@@ -147,10 +136,19 @@ public class FixedImpl {
         public boolean isSorted() {
             for (Node current = beforeFirst.next;;) {
                 if (current.next == afterLast) break;
-                if (current.value > current.next.value) return false;
+                if (current.value.compareTo(current.next.value) >= 1) return false;
                 current = current.next;
             }
             return true;
+        }
+
+        public static String randomString() {
+            int len = ThreadLocalRandom.current().nextInt(0, 15);
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < len; i++) {
+                sb.append(Character.toChars(ThreadLocalRandom.current().nextInt('0', 'z'+1)));
+            }
+            return sb.toString();
         }
 
         public static void selfTest(int testAmount, int listSize, boolean print) throws Exception {
@@ -167,14 +165,14 @@ public class FixedImpl {
                 for(int j = 0; j < listSize; j++) {
                     switch(ThreadLocalRandom.current().nextInt(0, 3)) {
                         case(0):
-                            dll.addNew(ThreadLocalRandom.current().nextInt(0, 99));
+                            dll.addNew(randomString());
                             continue;
                         case(1):
-                            dll.prependNew(ThreadLocalRandom.current().nextInt(0, 99));
+                            dll.prependNew(randomString());
                             continue;
                         case(2):
                             dll.insertNew(
-                                ThreadLocalRandom.current().nextInt(0, 99),
+                                randomString(),
                                 0
                             );
                             continue;
@@ -213,7 +211,7 @@ public class FixedImpl {
         Scanner sc = new Scanner(System.in);
         for(String input = sc.next(); !input.equals("END"); input = sc.next()) {
             try {
-                dll.addNew(Integer.parseInt(input));
+                dll.addNew(input);
             } catch(Exception e) {
                 System.out.println("Invalid input, try again.");
                 continue;
@@ -221,6 +219,7 @@ public class FixedImpl {
         }
         sc.close();
 
-        dll.bubbleSortList().print().printBack();
+        //dll.bubbleSortList().print().printBack();
+        dll.bubbleSortList().print();
     }
 }
