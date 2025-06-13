@@ -32,7 +32,7 @@ public class MartinBykov extends Gyarab2D {
             m.get(1, 0) * v.x + m.get(1, 1) * v.y + m.get(1, 2) * v.z + m.get(1, 3) * v.w,
             m.get(2, 0) * v.x + m.get(2, 1) * v.y + m.get(2, 2) * v.z + m.get(2, 3) * v.w,
             m.get(3, 0) * v.x + m.get(3, 1) * v.y + m.get(3, 2) * v.z + m.get(3, 3) * v.w
-            );
+         );
     }
 
     public void drawSquare(Matrix m, int idx, int top, int left, int bottom, int right) {
@@ -40,17 +40,15 @@ public class MartinBykov extends Gyarab2D {
         int startx = Math.min(left, right);
         int endy = Math.max(top, bottom);
         int endx = Math.max(left, right);
-
         double chx = 255/(endx - startx);
         double chy = 255/(endy - starty);
-
         for(int x = startx; x < endx; x++) {
             for(int y = starty; y < endy; y++) {
                 Vector4D result = multiplyByMatrix(new Vector4D(x, y, 1, 1), m);
                 f.namalujBodFake((int)result.x, (int)result.y, 
                     idx*(255/IDX_AMOUNT),
-                    (int)Math.floor(x*chx),
-                    (int)Math.floor(y*chy)
+                    (int)Math.floor((x-startx)*chx),
+                    (int)Math.floor((y-starty)*chy)
                 );
             }
         }
@@ -63,9 +61,7 @@ public class MartinBykov extends Gyarab2D {
         int endx = Math.max(left, right);
         int startz = Math.min(front, back);
         int endz = Math.max(front, back);
-
         int cr, cg, cb;
-
         for(int x = startx; x < endx; x++) {
             for(int y = starty; y < endy; y++) {
                 for(int z = startz; z < endz; z++) {
@@ -75,7 +71,6 @@ public class MartinBykov extends Gyarab2D {
                     cr = (x == endx) ? 127 : cr;
                     cb = (y == endy) ? 127 : cb;
                     cg = (z == endz) ? 127 : cg;
-
                     Vector4D result = multiplyByMatrix(new Vector4D(x, y, z, 1), m);
                     f.namalujBodFake(
                         (int)result.x, (int)result.y,
@@ -108,15 +103,12 @@ public class MartinBykov extends Gyarab2D {
 
     public static boolean dir = false;
 
-    public Matrix buildMatrix(
-        double translateX, double translateY, double translateZ, 
+    public Matrix buildMatrix(double translateX, double translateY, double translateZ, 
         double scaleX, double scaleY, double scaleZ, 
         double rotX, double rotY, double rotZ) {
-
         double radX = rotX*Math.PI/180;
         double radY = rotY*Math.PI/180;
         double radZ = rotZ*Math.PI/180;
-
         double cx = Math.cos(radX);
         double sx = Math.sin(radX);
         double cy = Math.cos(radY);
@@ -137,6 +129,12 @@ public class MartinBykov extends Gyarab2D {
         Matrix rs = T.times(Rx).times(Ry).times(Rz).times(S);
         return rs;
     }  
+
+    public Matrix buildIdentity() {
+        //minified
+        double[][]idData={{1.0,0.0,0.0,0.0},{0.0,1.0,0.0,0.0},{0.0,0.0,1.0,0.0},{0.0,0.0,0.0,1.0},};
+        return new Matrix(idData);
+    }
 
     static final int LETTER_SIZE = 5;
 
@@ -221,20 +219,29 @@ public class MartinBykov extends Gyarab2D {
                 return; //out of bounds
             }
             this.pixels[x+this.app.maxXY][y+this.app.maxXY] = new PixelRepresentation();
-            this.pixels[x+this.app.maxXY][y+this.app.maxXY].r = r;
-            this.pixels[x+this.app.maxXY][y+this.app.maxXY].g = g;
-            this.pixels[x+this.app.maxXY][y+this.app.maxXY].b = b;
+            this.pixels[x+this.app.maxXY][y+this.app.maxXY].r = Math.max(Math.min(255, r), 0);
+            this.pixels[x+this.app.maxXY][y+this.app.maxXY].g = Math.max(Math.min(255, g), 0);
+            this.pixels[x+this.app.maxXY][y+this.app.maxXY].b = Math.max(Math.min(255, b), 0);
         }
         public void namalujBodFake(double x, double y, double r, double g, double b) {
             this.namalujBodFake((int)x, (int)y, (int)r, (int)g, (int)b);
         }
-
         public void namalujBodFake(int x, int y, int s) {
             this.namalujBodFake(x, y, s, s, s);
         }
         public void namalujBodFake(double x, double y, double s) {
             this.namalujBodFake(x, y, s, s, s);
         }        
+
+        public void scaleColor(double r, double g, double b) {
+            for(int i = 0; i < this.app.maxXY*2; i++) {
+                for(int j = 0; j < this.app.maxXY*2; j++) {
+                    this.pixels[i][j].r = (int)Math.min(255, (this.pixels[i][j].r * r));
+                    this.pixels[i][j].g = (int)Math.min(255, (this.pixels[i][j].g * g));
+                    this.pixels[i][j].b = (int)Math.min(255, (this.pixels[i][j].b * b));
+                }
+            }
+        }
 
         public void subblur(int xleft, int ybottom, int xright, int ytop) {
             PixelRepresentation[][] newPixels = new PixelRepresentation[this.app.maxXY*2][this.app.maxXY*2];
@@ -260,18 +267,10 @@ public class MartinBykov extends Gyarab2D {
                                 if(i+dx < 0 || i+dx >= this.app.maxXY*2 || 
                                 j+dy < 0 || j+dy >= this.app.maxXY*2) continue; //out of bounds
                                 
-                                if(this.pixels[i+dx][j+dy] != null) {
-                                    r += this.pixels[i+dx][j+dy].r;
-                                    g += this.pixels[i+dx][j+dy].g;
-                                    b += this.pixels[i+dx][j+dy].b;
-                                    amount++;
-                                }
-                                else {
-                                    r += 255; //white
-                                    g += 255;
-                                    b += 255;
-                                    amount++;
-                                }
+                                r += this.pixels[i+dx][j+dy].r;
+                                g += this.pixels[i+dx][j+dy].g;
+                                b += this.pixels[i+dx][j+dy].b;
+                                amount++;
                             }
                         }
 
@@ -302,20 +301,38 @@ public class MartinBykov extends Gyarab2D {
             this.subblur(-this.app.maxXY, -this.app.maxXY, this.app.maxXY, this.app.maxXY);
         }
 
+        public void vignette(double size) {
+            double maxDist = Math.sqrt(Math.pow(this.app.maxXY, 2) + Math.pow(this.app.maxXY, 2));
+            for(int i = 0; i < this.app.maxXY*2; i++) {
+                for(int j = 0; j < this.app.maxXY*2; j++) {
+                    double dist = Math.sqrt(Math.pow(i-this.app.maxXY, 2) + Math.pow(j-this.app.maxXY, 2));
+                    double factor = dist / maxDist; //avoid division by zero
+                    this.pixels[i][j].r *= Math.max(0.0, Math.min(1.0, 1.0 - factor + size));
+                    this.pixels[i][j].g *= Math.max(0.0, Math.min(1.0, 1.0 - factor + size));
+                    this.pixels[i][j].b *= Math.max(0.0, Math.min(1.0, 1.0 - factor + size));
+                }   
+            }
+        }
+
+        public void fade(double factor) {
+            for(int i = 0; i < this.app.maxXY*2; i++) {
+                for(int j = 0; j < this.app.maxXY*2; j++) {
+                    this.pixels[i][j].r *= factor;
+                    this.pixels[i][j].g *= factor;
+                    this.pixels[i][j].b *= factor;
+                }   
+            }
+        }
+
         public void draw() {
              for(int i = 0; i < this.app.maxXY*2; i++) {
                 for(int j = 0; j < this.app.maxXY*2; j++) {
-                    if(this.pixels[i][j] == null) {
-                        this.app.namalujBod(i-this.app.maxXY, j-this.app.maxXY, 255, 255, 255);
-                    }
-                    else {
-                        this.app.namalujBod(
-                            i-this.app.maxXY, j-this.app.maxXY, 
-                            this.pixels[i][j].r, 
-                            this.pixels[i][j].g, 
-                            this.pixels[i][j].b
-                        );
-                    }
+                    this.app.namalujBod(
+                        i-this.app.maxXY, j-this.app.maxXY, 
+                        this.pixels[i][j].r, 
+                        this.pixels[i][j].g, 
+                        this.pixels[i][j].b
+                    );
                 }   
             }
         }
@@ -345,14 +362,16 @@ all through: \"When will the devil
 come for you?\" 
 """;
 
+        int offset = (dir ? idx : IDX_AMOUNT-idx)*5;
+        
         drawGrid();
+
+        drawSquare(buildMatrix(-100+offset, -80, 0, 2, 1, 1, 0, 0, 45+idx*5), (dir ? idx : IDX_AMOUNT-idx), 10, 20, -10, -20);
 
         drawText(
             buildMatrix(0, 0, 0, 1, 1, 1, 0, 0, 0),
              onegin, -102, 60,
              127, 127, 255);
-
-        int offset = (dir ? idx : IDX_AMOUNT-idx)*5;
 
         double transforms[][] = {
             {-50, -40, 0.25, 1}, {0, -40, 0.5, 2}, {50, -40, 1, 0},
@@ -371,8 +390,6 @@ come for you?\"
             );
         }
 
-        drawSquare(buildMatrix(-100+offset, -80, 0, 2, 1, 1, 0, 0, 45+idx*5), (dir ? idx : IDX_AMOUNT-idx), 10, 20, -10, -20);
-
         drawCube(
             buildMatrix(
                 100-offset, -80, 0, 
@@ -386,8 +403,14 @@ come for you?\"
         String cdas = "Ceske Drahy, narodni dopravce\nR 667 Rozmberk\nBrno hl.n. \uAAAA\uBBBB Plzen hl.n.\n"+time;
         drawText(buildMatrix(0, 100-idx/2, 0, 1, 1, 1, 0, 0, idx < IDX_AMOUNT/2 ? 5 : -5), cdas, -80, 0, 255, 0, 0);
 
-        //f.blur();
+        if(idx < IDX_AMOUNT/4.0) f.scaleColor(0.5, 1.0, 0.5);
+        else if(idx < IDX_AMOUNT/2.0) f.scaleColor(1.0, 0.5, 0.5);
+        else if(idx < IDX_AMOUNT*3/4.0) f.scaleColor(0.5, 0.5, 1.0);
+        else f.scaleColor(1.0, 1.0, 1.0);
+        
         f.subblur(-100+(idx*5), -100+(idx*5), -50+(idx*5), -50+(idx*5));
+        f.vignette(0.3);
+        f.fade(0.9);
         f.draw();
         f.clear();
 
