@@ -1,20 +1,11 @@
-/*
- * Eins.java
- * Matrices playground and a simple text renderer.
- * Copyright (C) 2025 Martin Bykov
- * @author Martin Bykov
- * Uses Jan Lana's Gyarab2D library.
- */
-
 package gyarab.grafika;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MartinBykov extends Gyarab2D {
     static final int IDX_AMOUNT = 30;
     static Framebuffer f;
-
+    
     public class Vector4D {
         public double x, y, z, w;
 
@@ -325,7 +316,7 @@ public class MartinBykov extends Gyarab2D {
         }
 
         public void draw() {
-             for(int i = 0; i < this.app.maxXY*2; i++) {
+            for(int i = 0; i < this.app.maxXY*2; i++) {
                 for(int j = 0; j < this.app.maxXY*2; j++) {
                     this.app.namalujBod(
                         i-this.app.maxXY, j-this.app.maxXY, 
@@ -389,7 +380,6 @@ come for you?\"
                 10, -10, -10, 10, 10, -10
             );
         }
-
         drawCube(
             buildMatrix(
                 100-offset, -80, 0, 
@@ -398,7 +388,6 @@ come for you?\"
                 (dir ? idx : IDX_AMOUNT-idx),
             10, -10, -10, 10, 10, -10
         );
-
         String time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss, dd-MM-yyyy"));
         String cdas = "Ceske Drahy, narodni dopravce\nR 667 Rozmberk\nBrno hl.n. \uAAAA\uBBBB Plzen hl.n.\n"+time;
         drawText(buildMatrix(0, 100-idx/2, 0, 1, 1, 1, 0, 0, idx < IDX_AMOUNT/2 ? 5 : -5), cdas, -80, 0, 255, 0, 0);
